@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hostel Attendance System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Landing Page -->
+    <div class="landing" id="landingPage">
+        <div class="landing-content">
+            <h1>🏠 Hostel Attendance System</h1>
+            <p>Simple and efficient attendance management</p>
+            <div class="role-buttons">
+                <button class="role-btn" onclick="showWardenPanel()">
+                    <span class="icon">👨‍💼</span>
+                    Warden Panel
+                </button>
+                <button class="role-btn" onclick="showResidentPanel()">
+                    <span class="icon">👨‍🎓</span>
+                    Resident Panel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Warden/Admin Panel -->
+    <div class="page" id="wardenPanel">
+        <div class="navbar">
+            <h2>👨‍💼 Warden Panel</h2>
+            <button class="btn-logout" onclick="goHome()">← Back to Home</button>
+        </div>
+
+        <div class="container">
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="number" id="totalResidents">0</div>
+                    <div class="label">Total Residents</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="presentToday">0</div>
+                    <div class="label">Present Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="absentToday">0</div>
+                    <div class="label">Absent Today</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="totalCheckIns">0</div>
+                    <div class="label">Total Check-ins</div>
+                </div>
+            </div>
+
+            <!-- Attendance Log -->
+            <div class="card">
+                <h3>📋 Today's Attendance Log</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Resident ID</th>
+                                <th>Name</th>
+                                <th>Room</th>
+                                <th>Status</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attendanceLog">
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: #95a5a6;">No attendance records yet</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Resident Management -->
+            <div class="card">
+                <h3>👥 All Residents</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Room</th>
+                                <th>Contact</th>
+                                <th>Current Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="residentsList">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resident Panel -->
+    <div class="page" id="residentPanel">
+        <div class="navbar">
+            <h2>👨‍🎓 Resident Panel</h2>
+            <button class="btn-logout" onclick="residentLogout()">Logout</button>
+        </div>
+
+        <div class="container">
+            <!-- Login Form -->
+            <div class="card" id="residentLogin">
+                <h3>🔐 Resident Login</h3>
+                <div class="form-group">
+                    <label>Resident ID</label>
+                    <input type="text" id="residentId" placeholder="Enter your ID (e.g., R001)">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="residentPassword" placeholder="Enter password">
+                </div>
+                <button class="btn btn-full" onclick="residentLogin()">Login</button>
+            </div>
+
+            <!-- Dashboard -->
+            <div id="residentDashboard" style="display: none;">
+                <!-- User Info -->
+                <div class="card">
+                    <h3>Welcome, <span id="residentName">Resident</span>! 👋</h3>
+                    <div class="info-box">
+                        <p><strong>ID:</strong> <span id="displayResidentId">---</span></p>
+                        <p><strong>Room:</strong> <span id="displayRoom">---</span></p>
+                        <p><strong>Current Status:</strong> <span id="displayStatus">---</span></p>
+                        <p><strong>Current Time:</strong> <span id="currentTime">---</span></p>
+                    </div>
+                </div>
+
+                <!-- Attendance Marking -->
+                <div class="card">
+                    <h3>📍 Mark Attendance</h3>
+                    <div id="successMsg"></div>
+                    <button class="btn attendance-btn check-in" id="checkInBtn" onclick="markAttendance('in')">
+                        ✓ Check In
+                    </button>
+                    <button class="btn attendance-btn check-out" id="checkOutBtn" onclick="markAttendance('out')" style="display: none;">
+                        ✗ Check Out
+                    </button>
+                </div>
+
+                <!-- My Records -->
+                <div class="card">
+                    <h3>📊 My Attendance Records</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Time</th>
+                                </tr>
+                            </thead>
+                            <tbody id="myRecords">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
